@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'index.html' %}
+{% block contents %}
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Products List<h4>
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+            <tr>
+              <th>Category name</th>
+              <th>Product name</th>
+              <th>Price</th>
+              <th>Description</th>
+              <th>Brand</th>
+              <th>Image</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for i in pro %}
+            <tr>
+              <td>{{i.p_category}}</td>
+              <td>{{i.prod_name}}</td>
+              <td>{{i.prod_price}}</td>
+              <td>{{i.prod_description}}</td>
+              <td>{{i.prod_brand}}</td>
+              <td><img src="{{i.image.url}}"></td>
+              <td>
+                <form action="{% url 'editproduct' dataid=i.id %}">
+                  <button type="submit" class="btn btn-primary">Edit</button>
+                </form>
+              </td>
+              <td>
+                <form action="{% url 'deleteproduct' dataid=i.id %}">
+                  <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+{% endblock %}
